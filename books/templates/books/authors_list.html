@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- Search by the name of the books -->
+    <form action="" method="get">
+        {{ form.as_table }}
+        <input type="submit" value="Search">
+    </form>
+
+    <a href="{% url 'books:author_create' %}" class="btn btn-primary">Create Author</a><br><br>
+
+    {% for author in authors %}
+        <div style="display: inline-block; border: 1px solid #975252;
+            padding: 10px; text-decoration: none; color: #9f4c4c; border-radius: 5px;">
+            <a href="{% url 'books:books_list_author' author.id %}">
+                {{ forloop.counter }} - {{ author.first_name }} {{ author.last_name }}
+            </a>
+            <a href="{% url 'books:author_delete' author.id %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'books:author_edit' author.id %}" class="btn btn-info">Edit</a>
+            <p> Age : {{ author.age }} </p>
+            <small> National code : {{ author.national_code }} </small>
+        </div><br>
+        <hr><br>
+    {% endfor %}
+
+{% endblock %}

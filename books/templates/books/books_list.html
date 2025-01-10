@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- Search by the name of the books -->
+    <form action="" method="get">
+        {{ form.as_table }}
+        <input type="submit" value="Search">
+    </form>
+
+
+    <!-- create book bottom -->
+    <a href="{% url 'books:book_create' %}" class="btn btn-primary">Create Book</a><br><br>
+
+
+    {% for book in books %}
+        <a href="{% url 'books:book_detail' book.id %}" style="display: inline-block; border: 1px solid #975252;
+            padding: 10px; text-decoration: none; color: #9f4c4c; border-radius: 5px;">
+            {{ forloop.counter }} - {{ book.name }}
+        </a><br><br>
+    {% endfor %}
+
+{% endblock %}
